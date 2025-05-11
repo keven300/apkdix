@@ -1,0 +1,39 @@
+"use client"
+
+import { useState } from "react"
+import { FaAndroid, FaApple } from "react-icons/fa"
+
+export default function DownloadButtons() {
+  const [isDownloading, setIsDownloading] = useState(false)
+
+  const handleDownload = (platform: "android" | "ios") => {
+    setIsDownloading(true)
+
+    // Simulate download process
+    setTimeout(() => {
+      alert(`Download started for ${platform === "android" ? "Android" : "iOS"} version.`)
+      setIsDownloading(false)
+    }, 1500)
+  }
+
+  return (
+    <div className="text-center my-8">
+      <button
+        onClick={() => handleDownload("android")}
+        disabled={isDownloading}
+        className="inline-flex items-center gap-2 px-8 py-3 bg-[#00ffcc] text-[#121212] rounded-full font-bold transition hover:bg-[#00ccff] mb-3 w-full md:w-auto md:mr-3 justify-center disabled:opacity-70"
+      >
+        <FaAndroid className="text-xl" />
+        {isDownloading ? "Processing..." : "Download for Android"}
+      </button>
+      <button
+        onClick={() => handleDownload("ios")}
+        disabled={isDownloading}
+        className="inline-flex items-center gap-2 px-8 py-3 bg-[#00ffcc] text-[#121212] rounded-full font-bold transition hover:bg-[#00ccff] w-full md:w-auto justify-center disabled:opacity-70"
+      >
+        <FaApple className="text-xl" />
+        {isDownloading ? "Processing..." : "Download for iOS"}
+      </button>
+    </div>
+  )
+}
